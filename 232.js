@@ -62,6 +62,7 @@ MyQueue.prototype.peek = function () {
       this.stackB.push(this.stackA.pop());
     }
   }
+  //B栈顶部元素也就是队列头部元素
   return this.stackB[this.stackB.length - 1];
 };
 
