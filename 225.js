@@ -1,6 +1,8 @@
 /**
  * Initialize your data structure here.
+ * 用两个队列实现栈，先进先出实现先进后出
  */
+
 var MyStack = function () {
   this.queue = [];
   this._queue = [];
