@@ -10,33 +10,39 @@
  * @param {TreeNode} root
  * @return {number[]}
  */
-var inorderTraversal = function (root) {
+var postorderTraversal = function (root) {
   let res = [];
-  const inorder = (root) => {
-    if (root == null) {
+  const postorder = (root) => {
+    if (root === null) {
       return;
     }
-    inorder(root.left);
+    postorder(root.left);
+    postorder(root.right);
     res.push(root.val);
-    inorder(root.right);
   };
+  postorder(root);
 
-  inorder(root);
   return res;
 };
-//非递归遍历
-var inorderTraversal = function (root) {
+//
+var postorderTraversal = function (root) {
   let res = [];
   let path = [];
   let p = root;
-  //中序遍历，先找到中间节点的信息
-  while (path.length > 0 || p) {
+  let visited = new Set();
+  while (path.length || p) {
     while (p) {
       path.push(p);
       p = p.left;
     }
-    let node = path.pop();
-    res.push(node.val);
-    p = node.right;
+    let node = path[path.length - 1];
+    if (node.right && !visited.has(node.right)) {
+      visited.add(node.right);
+      p = node.right;
+    } else {
+      res.push(node.val);
+      path.pop();
+    }
   }
+  return res;
 };
